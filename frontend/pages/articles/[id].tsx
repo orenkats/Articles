@@ -1,54 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { Article } from '@/types/article';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
+import { Article } from '@/types/article';
+import styles from '../index.module.scss';
 
-type ArticleListProps = {
-  articles: Article[] | null | undefined;
-  lazyLoad?: boolean; // Define lazyLoad as optional
+type ArticlePageProps = {
+  article: Article;
 };
 
-export default function ArticleList({ articles, lazyLoad = false }: ArticleListProps) {
-  const [visibleArticles, setVisibleArticles] = useState<Article[]>([]);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string };
 
-  useEffect(() => {
-    if (!lazyLoad || !articles) return;
-    setVisibleArticles(articles.slice(0, 5)); // Initially show 5 articles
-  }, [articles, lazyLoad]);
+  // Fetch the specific article by ID
+  const res = await fetch(`http://localhost:5075/api/data/articles`);
+  const articles: Article[] = await res.json();
 
-  const loadMore = () => {
-    if (!articles) return;
-    setVisibleArticles(articles);
-  };
+  const article = articles.find((a) => a.id === parseInt(id, 10));
 
-  if (!articles || !Array.isArray(articles)) {
-    return <div>No articles found or data is invalid.</div>;
+  if (!article) {
+    return { notFound: true }; // If no article is found, show 404
   }
 
+  return { props: { article } };
+};
+
+export default function ArticlePage({ article }: ArticlePageProps) {
   return (
-    <ul style={{ listStyle: 'none', padding: 0 }}>
-      {visibleArticles.map((article) => (
-        <li key={article.id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-          <img src={article.imageURL} alt={article.title} style={{ width: '100%', borderRadius: '5px' }} />
-          <h2>{article.title}</h2>
-          <p>{article.description?.slice(0, 100)}...</p>
-          <div>
-            <strong>Tags:</strong>
-            <ul>
-              {article.tags.map((tag) => (
-                <li key={tag.tagId}>
-                  <Link href={`/tags/${tag.tagId}`}>{tag.tagName}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Link href={`/articles/${article.id}`}>Read More</Link>
-        </li>
-      ))}
-      {lazyLoad && visibleArticles.length < articles.length && (
-        <button onClick={loadMore} style={{ margin: '20px auto', display: 'block' }}>
-          Load More
-        </button>
-      )}
-    </ul>
+    <div className={styles.homePage}>
+      {/* Display the selected article */}
+      <div className={styles.mainArticle}>
+        <h1 className={styles.title}>{article.title}</h1>
+        <img
+          src={article.imageURL}
+          alt={article.title}
+          className={styles.image}
+        />
+        <p className={styles.description}>{article.description}</p>
+        <div className={styles.tags}>
+          <strong>Tags:</strong>
+          <ul>
+            {article.tags.map((tag) => (
+              <li key={tag.tagId}>
+                <Link href={`/tags/${tag.tagId}`} className={styles.link}>
+                  {tag.tagName}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }

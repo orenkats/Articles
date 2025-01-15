@@ -1,0 +1,72 @@
+.homePage {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    direction: rtl; /* Right-to-left layout for Hebrew */
+    text-align: right; /* Align text to the right */
+  }
+  
+  .mainArticle {
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    width: 80%; /* Adjust width to control size */
+    max-width: 600px; /* Limit maximum width */
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Add space below the image */
+    display: block;
+    margin-right: 0; /* Reset right margin */
+    margin-left: auto; /* Center align for right-to-left context */
+  }
+  
+  .textContent {
+    margin-top: 20px; /* Space above text content */
+  }
+  
+  .description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .tags {
+    margin-top: 10px; /* Space above tags */
+  }
+  
+  .tags ul {
+    list-style: none;
+    padding: 0;
+    display: inline-flex; /* Inline tags */
+    gap: 10px;
+  }
+  
+  .additionalHeader {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .additionalList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .additionalList li {
+    margin-bottom: 10px;
+  }
+  
+  .link {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .link:hover {
+    color: darkblue;
+  }
+  

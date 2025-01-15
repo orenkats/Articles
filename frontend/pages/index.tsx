@@ -1,61 +1,69 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link'; // Ensure Link is imported
-import { Article } from '../types/article';
-import ArticleList from '../components/ArticleList';
+import { useState } from 'react';
+import Link from 'next/link';
+import { Article } from '@/types/article';
+import styles from './index.module.scss';
 
 type HomePageProps = {
   articles: Article[];
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    const res = await fetch('http://localhost:5075/api/data/articles');
+  const res = await fetch('http://localhost:5075/api/data/articles');
+  const articles: Article[] = await res.json();
 
-    if (!res.ok) {
-      console.error(`Error fetching articles: ${res.statusText}`);
-      return { props: { articles: [] } };
-    }
-
-    const articles: Article[] = await res.json();
-    return { props: { articles } };
-  } catch (error) {
-    console.error('Error in getServerSideProps:', error);
-    return { props: { articles: [] } };
-  }
+  return { props: { articles } };
 };
 
 export default function HomePage({ articles }: HomePageProps) {
-  if (!articles || articles.length === 0) {
-    return <div>No articles available</div>;
-  }
+  const [mainArticle, setMainArticle] = useState<Article>(articles[0]);
+  const [otherArticles, setOtherArticles] = useState<Article[]>(articles.slice(1));
 
-  const [mainArticle, ...additionalArticles] = articles;
+  const handleArticleClick = (clickedArticle: Article) => {
+    // Swap main article with the clicked one
+    setOtherArticles([mainArticle, ...otherArticles.filter(a => a.id !== clickedArticle.id)]);
+    setMainArticle(clickedArticle);
+  };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>{mainArticle.title}</h1>
-      <img
-        src={mainArticle.imageURL}
-        alt={mainArticle.title}
-        style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
-      />
-      <p>{mainArticle.description}</p>
-      <div>
-        <strong>Tags:</strong>
-        <ul style={{ display: 'flex', gap: '10px', padding: 0 }}>
-          {mainArticle.tags.map((tag) => (
-            <li key={tag.tagId} style={{ listStyle: 'none' }}>
-              <Link href={`/tags/${tag.tagId}`} passHref>
-                <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>
+    <div className={styles.homePage}>
+      {/* Main Article */}
+      <div className={styles.mainArticle}>
+        <h1 className={styles.title}>{mainArticle.title}</h1>
+        <img
+          src={mainArticle.imageURL}
+          alt={mainArticle.title}
+          className={styles.image}
+        />
+        <p className={styles.description}>{mainArticle.description}</p>
+        <div className={styles.tags}>
+          <strong>Tags:</strong>
+          <ul>
+            {mainArticle.tags.map((tag) => (
+              <li key={tag.tagId}>
+                <Link href={`/tags/${tag.tagId}`} className={styles.link}>
                   {tag.tagName}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <h2>כתבות נוספות</h2>
-      <ArticleList articles={additionalArticles} />
+
+      {/* Additional Articles */}
+      <h2 className={styles.additionalHeader}>כתבות נוספות</h2>
+      <ul className={styles.additionalList}>
+        {otherArticles.map((article) => (
+          <li key={article.id}>
+            <button
+              onClick={() => handleArticleClick(article)}
+              className={styles.linkButton}
+            >
+              {article.title}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
