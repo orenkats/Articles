@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import ArticleList from '@/components/ArticleList';
-import { Article } from '@/types/articale';
+import { Article } from '@/types/article';
 
 type TagPageProps = {
   tagId: number;
@@ -33,7 +33,8 @@ export default function TagPage({ tagId, articles }: TagPageProps) {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Articles for Tag {tagId}</h1>
-      <ArticleList articles={articles} lazyLoad={true} />
+      {/* Pass articles to ArticleList */}
+      <ArticleList articles={articles}/>
     </div>
   );
 }

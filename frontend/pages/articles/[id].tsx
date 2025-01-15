@@ -1,67 +1,54 @@
-import { GetServerSideProps } from 'next';
+import React, { useEffect, useState } from 'react';
+import { Article } from '@/types/article';
 import Link from 'next/link';
-import ArticleList from '@/components/ArticleList';
-import { Article } from '@/types/articale';
 
-type ArticlePageProps = {
-  article: Article | null;
-  otherArticles: Article[];
+type ArticleListProps = {
+  articles: Article[] | null | undefined;
+  lazyLoad?: boolean; // Define lazyLoad as optional
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
+export default function ArticleList({ articles, lazyLoad = false }: ArticleListProps) {
+  const [visibleArticles, setVisibleArticles] = useState<Article[]>([]);
 
-  const res = await fetch('http://localhost:5075/api/data/articles');
-  const articles: Article[] = await res.json();
+  useEffect(() => {
+    if (!lazyLoad || !articles) return;
+    setVisibleArticles(articles.slice(0, 5)); // Initially show 5 articles
+  }, [articles, lazyLoad]);
 
-  const article = articles.find((a) => a.id === parseInt(id, 10)) || null;
-  const otherArticles = articles.filter((a) => a.id !== parseInt(id, 10));
-
-  return { props: { article, otherArticles } };
-};
-
-export default function ArticlePage({ article, otherArticles }: ArticlePageProps) {
-  if (!article) {
-    return <div>404 - Article Not Found</div>;
-  }
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: article.title,
-          text: article.description,
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.error('Sharing failed:', error);
-      }
-    } else {
-      alert('Sharing is not supported on this browser.');
-    }
+  const loadMore = () => {
+    if (!articles) return;
+    setVisibleArticles(articles);
   };
 
+  if (!articles || !Array.isArray(articles)) {
+    return <div>No articles found or data is invalid.</div>;
+  }
+
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>{article.title}</h1>
-      <img
-        src={article.imageURL}
-        alt={article.title}
-        style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
-      />
-      <p>{article.body}</p>
-
-      <button onClick={handleShare} style={{ margin: '20px 0', cursor: 'pointer' }}>
-        <img
-          src="https://images.maariv.co.il/image/upload/e_make_transparent:10/873147.svg"
-          alt="Share Icon"
-          style={{ width: '20px', height: '20px' }}
-        />
-        Share
-      </button>
-
-      <h2>כתבות נוספות</h2>
-      <ArticleList articles={otherArticles} lazyLoad={true} />
-    </div>
+    <ul style={{ listStyle: 'none', padding: 0 }}>
+      {visibleArticles.map((article) => (
+        <li key={article.id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
+          <img src={article.imageURL} alt={article.title} style={{ width: '100%', borderRadius: '5px' }} />
+          <h2>{article.title}</h2>
+          <p>{article.description?.slice(0, 100)}...</p>
+          <div>
+            <strong>Tags:</strong>
+            <ul>
+              {article.tags.map((tag) => (
+                <li key={tag.tagId}>
+                  <Link href={`/tags/${tag.tagId}`}>{tag.tagName}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Link href={`/articles/${article.id}`}>Read More</Link>
+        </li>
+      ))}
+      {lazyLoad && visibleArticles.length < articles.length && (
+        <button onClick={loadMore} style={{ margin: '20px auto', display: 'block' }}>
+          Load More
+        </button>
+      )}
+    </ul>
   );
 }
