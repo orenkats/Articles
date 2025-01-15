@@ -37,9 +37,13 @@
   
   .tags {
     margin-top: 10px; /* Space above tags */
+    display: flex; /* Flexbox for row layout */
+    flex-wrap: wrap; /* Allow wrapping if there are too many tags */
+    gap: 10px; /* Space between tags */
   }
   
   .tags ul {
+    display: flex; 
     list-style: none;
     padding: 0;
     display: inline-flex; /* Inline tags */

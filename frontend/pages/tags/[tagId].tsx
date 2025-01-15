@@ -1,6 +1,8 @@
+// pages/tags/[tagId].tsx
 import { GetServerSideProps } from 'next';
 import styles from './TagPage.module.scss';
 import ArticleList from '@/components/ArticleList';
+import { fetchArticlesByTag } from '@/services/apiService';
 import { Article } from '@/types/article';
 
 type TagPageProps = {
@@ -10,12 +12,8 @@ type TagPageProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { tagId } = context.params as { tagId: string };
-  const res = await fetch('http://localhost:5075/api/data/articles');
-  const articles: Article[] = await res.json();
-  const filteredArticles = articles.filter((article) =>
-    article.tags.some((tag) => tag.tagId === parseInt(tagId, 10))
-  );
-  return { props: { tagId: parseInt(tagId, 10), articles: filteredArticles } };
+  const articles = await fetchArticlesByTag(Number(tagId));
+  return { props: { tagId: Number(tagId), articles } };
 };
 
 export default function TagPage({ tagId, articles }: TagPageProps) {

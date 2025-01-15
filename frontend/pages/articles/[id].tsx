@@ -1,5 +1,7 @@
+// pages/articles/[id].tsx
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
+import { fetchArticleById } from '@/services/apiService';
 import { Article } from '@/types/article';
 import styles from '../index.module.scss';
 
@@ -9,15 +11,10 @@ type ArticlePageProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
-
-  // Fetch the specific article by ID
-  const res = await fetch(`http://localhost:5075/api/data/articles`);
-  const articles: Article[] = await res.json();
-
-  const article = articles.find((a) => a.id === parseInt(id, 10));
+  const article = await fetchArticleById(Number(id));
 
   if (!article) {
-    return { notFound: true }; // If no article is found, show 404
+    return { notFound: true };
   }
 
   return { props: { article } };
@@ -26,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function ArticlePage({ article }: ArticlePageProps) {
   return (
     <div className={styles.homePage}>
-      {/* Display the selected article */}
       <div className={styles.mainArticle}>
         <h1 className={styles.title}>{article.title}</h1>
         <img

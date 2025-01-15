@@ -1,0 +1,28 @@
+.additionalArticles {
+    margin-top: 20px; // Add spacing above the additional articles section
+}
+
+.header {
+    font-size: 20px; // Set font size for the header
+    margin-bottom: 10px; // Add spacing below the header
+}
+
+.list {
+    display: flex; 
+    list-style: none; // Remove default list styling
+    padding: 0; // Remove padding for the list
+}
+
+.item {
+    margin-bottom: 5px; // Add small spacing below each item
+}
+
+.link {
+    color: blue; // Set link color to blue
+    text-decoration: underline; // Underline the link text
+    cursor: pointer; // Show pointer cursor on hover
+}
+
+.link:hover {
+    color: darkblue; // Change to a darker blue on hover
+}

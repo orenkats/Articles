@@ -20,7 +20,6 @@ export default function ArticleList({ articles }: ArticleListProps) {
           <h2 className={styles.title}>{article.title}</h2>
           <p className={styles.description}>{article.description?.slice(0, 100)}...</p>
           <div className={styles.tags}>
-            <strong>Tags:</strong>
             <ul className={styles.tagList}>
               {article.tags.map((tag) => (
                 <li key={tag.tagId} className={styles.tagItem}>
@@ -32,7 +31,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
             </ul>
           </div>
           <Link href={`/articles/${article.id}`} className={styles.readMore}>
-            Read More
+           
           </Link>
         </li>
       ))}

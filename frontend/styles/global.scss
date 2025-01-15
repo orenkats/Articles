@@ -1,0 +1,42 @@
+// styles/global.scss
+
+// Variables for breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+
+// Responsive utilities
+@mixin responsive-mobile {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin responsive-tablet {
+  @media (min-width: #{$breakpoint-mobile + 1}) and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin responsive-desktop {
+  @media (min-width: #{$breakpoint-tablet + 1}) {
+    @content;
+  }
+}
+
+// Shared styles
+.link {
+  color: blue;
+  text-decoration: underline;
+
+  &:hover {
+    color: darkblue;
+  }
+
+  @include responsive-mobile {
+    font-size: 14px;
+  }
+
+  @include responsive-desktop {
+    font-size: 16px;
+  }
+}
