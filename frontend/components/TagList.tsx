@@ -1,16 +1,15 @@
 import Link from 'next/link';
-
-type Tag = {
-  tagId: number;
-  tagName: string;
-  tagUrl: string;
-};
+import { Tag } from '@/types/tag';
 
 type TagListProps = {
   tags: Tag[];
 };
 
 export default function TagList({ tags }: TagListProps) {
+  if (!tags || tags.length === 0) {
+    return <div>No tags available</div>;
+  }
+
   return (
     <ul>
       {tags.map((tag) => (

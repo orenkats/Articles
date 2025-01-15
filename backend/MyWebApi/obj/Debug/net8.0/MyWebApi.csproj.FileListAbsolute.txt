@@ -67,3 +67,4 @@ C:\Users\User\Desktop\Maariv\backend\MyWebApi\obj\Debug\net8.0\refint\MyWebApi.d
 C:\Users\User\Desktop\Maariv\backend\MyWebApi\obj\Debug\net8.0\MyWebApi.pdb
 C:\Users\User\Desktop\Maariv\backend\MyWebApi\obj\Debug\net8.0\MyWebApi.genruntimeconfig.cache
 C:\Users\User\Desktop\Maariv\backend\MyWebApi\obj\Debug\net8.0\ref\MyWebApi.dll
+C:\Users\User\Desktop\Maariv\backend\MyWebApi\obj\Debug\net8.0\MyWebApi.sourcelink.json

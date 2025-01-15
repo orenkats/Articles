@@ -31,6 +31,18 @@ export default function ArticleList({ articles, lazyLoad = false }: ArticleListP
           <img src={article.imageURL} alt={article.title} style={{ width: '100%', borderRadius: '5px' }} />
           <h2>{article.title}</h2>
           <p>{article.description?.slice(0, 100)}...</p>
+          <div>
+            <strong>Tags:</strong>
+            <ul>
+              {article.tags.map((tag) => (
+                <li key={tag.tagId}>
+                  <Link href={`/tags/${tag.tagId}`}>
+                    <a>{tag.tagName}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <Link href={`/articles/${article.id}`}>
             <a style={{ color: 'blue', textDecoration: 'underline' }}>Read More</a>
           </Link>
