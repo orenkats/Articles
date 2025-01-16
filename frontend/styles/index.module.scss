@@ -1,8 +1,8 @@
 .homePage {
     padding: 20px;
     font-family: Arial, sans-serif;
-    direction: rtl; /* Right-to-left layout for Hebrew */
-    text-align: right; /* Align text to the right */
+    direction: rtl; 
+    text-align: right; 
   }
   
   .mainArticle {
@@ -15,18 +15,18 @@
   }
   
   .image {
-    width: 80%; /* Adjust width to control size */
-    max-width: 600px; /* Limit maximum width */
+    width: 80%; 
+    max-width: 600px;
     height: auto;
     border-radius: 5px;
-    margin-bottom: 20px; /* Add space below the image */
+    margin-bottom: 20px; 
     display: block;
-    margin-right: 0; /* Reset right margin */
-    margin-left: auto; /* Center align for right-to-left context */
+    margin-right: 0; 
+    margin-left: auto; 
   }
   
   .textContent {
-    margin-top: 20px; /* Space above text content */
+    margin-top: 20px;
   }
   
   .description {
@@ -36,17 +36,17 @@
   }
   
   .tags {
-    margin-top: 10px; /* Space above tags */
-    display: flex; /* Flexbox for row layout */
-    flex-wrap: wrap; /* Allow wrapping if there are too many tags */
-    gap: 10px; /* Space between tags */
+    margin-top: 10px;
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
   }
   
   .tags ul {
     display: flex; 
     list-style: none;
     padding: 0;
-    display: inline-flex; /* Inline tags */
+    display: inline-flex; 
     gap: 10px;
   }
   

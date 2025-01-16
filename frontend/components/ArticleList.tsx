@@ -1,7 +1,7 @@
 import React from 'react';
 import { Article } from '@/types/article';
 import Link from 'next/link';
-import styles from '../styles/ArticleList.module.scss';
+import styles from '../styles/index.module.scss';
 
 type ArticleListProps = {
   articles: Article[] | null | undefined;
