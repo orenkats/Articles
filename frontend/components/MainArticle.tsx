@@ -1,7 +1,7 @@
 // components/MainArticle.tsx
 import Link from 'next/link';
 import { Article } from '@/types/article';
-import styles from '../styles/ArticlePage.module.scss';
+import styles from '../styles/index.module.scss';
 
 type MainArticleProps = {
   article: Article;

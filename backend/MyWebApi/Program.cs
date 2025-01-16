@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using MyWebApi.API.Middleware;
 using MyWebApi.Application.Interfaces;
 using MyWebApi.Infrastructure.FileReaders;
 
@@ -16,6 +17,8 @@ app.UseCors(builder =>
            .AllowAnyMethod());
 
 // Configure the HTTP request pipeline.
+// Use custom middleware for logging
+app.UseMiddleware<LoggingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

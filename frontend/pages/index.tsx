@@ -1,6 +1,5 @@
 // pages/index.tsx
 import { GetServerSideProps } from 'next';
-import { useArticleSwitcher } from '@/hooks/useArticleSwitcher';
 import { fetchArticles } from '@/services/apiService';
 import { Article } from '@/types/article';
 import MainArticle from '@/components/MainArticle';
@@ -17,16 +16,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 export default function HomePage({ articles }: HomePageProps) {
-  const { mainArticle, otherArticles, handleArticleClick } =
-    useArticleSwitcher(articles);
+  const mainArticle = articles[0]; // First article as the main article
+  const otherArticles = articles.slice(1); // Remaining articles as additional articles
 
   return (
     <div className={styles.homePage}>
+      {/* Render the main article */}
       <MainArticle article={mainArticle} />
-      <AdditionalArticles
-        articles={otherArticles}
-        onArticleClick={handleArticleClick}
-      />
+
+      {/* Render additional articles with links */}
+      <AdditionalArticles articles={otherArticles} />
     </div>
   );
 }

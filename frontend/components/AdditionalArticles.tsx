@@ -1,25 +1,21 @@
-// components/AdditionalArticles.tsx
+import Link from 'next/link';
 import { Article } from '@/types/article';
 import styles from '../styles/AdditionalArticles.module.scss';
 
 type AdditionalArticlesProps = {
   articles: Article[];
-  onArticleClick: (article: Article) => void;
 };
 
-export default function AdditionalArticles({articles, onArticleClick,}: AdditionalArticlesProps) {
+export default function AdditionalArticles({ articles }: AdditionalArticlesProps) {
   return (
     <div>
       <h2 className={styles.additionalHeader}>כתבות נוספות</h2>
       <ul className={styles.additionalList}>
         {articles.map((article) => (
           <li key={article.id}>
-            <button
-              onClick={() => onArticleClick(article)}
-              className={styles.linkButton}
-            >
+            <Link href={`/articles/${article.id}`} className={styles.linkButton}>
               {article.title}
-            </button>
+            </Link>
           </li>
         ))}
       </ul>
