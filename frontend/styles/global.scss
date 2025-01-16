@@ -1,4 +1,4 @@
-// styles/global.scss
+// global.scss
 
 // Variables for breakpoints
 $breakpoint-mobile: 480px;
@@ -38,5 +38,25 @@ $breakpoint-tablet: 768px;
 
   @include responsive-desktop {
     font-size: 16px;
+  }
+}
+
+.tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  li {
+    display: inline;
+    margin: 0;
   }
 }

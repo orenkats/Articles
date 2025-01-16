@@ -1,78 +1,67 @@
 .homePage {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    direction: rtl; 
-    text-align: right; 
-  }
-  
-  .mainArticle {
-    direction: rtl; 
-    margin-bottom: 40px;
-  }
-  
-  .title {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  .image {
-    width: 80%; 
-    max-width: 600px;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 20px; 
-    display: block;
-    margin-right: 0; 
-    margin-left: auto; 
-  }
-  
-  .textContent {
-    margin-top: 20px;
-  }
-  
-  .description {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
-  .tags {
-    margin-top: 10px;
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-  }
-  
-  .tags ul {
-    display: flex; 
-    list-style: none;
-    padding: 0;
-    display: inline-flex; 
-    gap: 10px;
-  }
-  
-  .additionalHeader {
-    direction: rtl; 
-    font-size: 22px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-  }
-  
-  .additionalList {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .additionalList li {
-    margin-bottom: 10px;
-  }
-  
-  .link {
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  .link:hover {
-    color: darkblue;
-  }
-  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.mainArticle {
+  direction: rtl;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.textContent {
+  margin-top: 20px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.tags {
+  margin-top: 10px;
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+}
+
+.tags ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: flex; 
+  gap: 10px; 
+}
+
+.tags li {
+  margin: 0;
+}
+
+.tags a {
+  color: blue;
+  text-decoration: underline;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tags a:hover {
+  color: darkblue;
+}
