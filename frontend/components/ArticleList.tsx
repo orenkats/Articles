@@ -1,7 +1,7 @@
 import React from 'react';
 import { Article } from '@/types/article';
 import Link from 'next/link';
-import styles from '../styles/index.module.scss';
+import styles from '../styles/ArticleList.module.scss';
 
 type ArticleListProps = {
   articles: Article[] | null | undefined;
@@ -16,8 +16,9 @@ export default function ArticleList({ articles }: ArticleListProps) {
     <ul className={styles.articleList}>
       {articles.map((article) => (
         <li key={article.id} className={styles.articleItem}>
-          <img src={article.imageURL} alt={article.title} className={styles.image} />
           <h2 className={styles.title}>{article.title}</h2>
+          <img src={article.imageURL} alt={article.title} className={styles.image} />
+          
           <p className={styles.description}>{article.description?.slice(0, 100)}...</p>
           <div className={styles.tags}>
             <ul className={styles.tagList}>

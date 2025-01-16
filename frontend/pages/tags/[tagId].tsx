@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function TagPage({ tagId, articles }: TagPageProps) {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Articles for Tag {tagId}</h1>
+      <h1 className={styles.title}> </h1>
       <ArticleList articles={articles} />
     </div>
   );

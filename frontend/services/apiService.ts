@@ -7,8 +7,16 @@ export const fetchArticles = async (): Promise<Article[]> => {
 };
 
 export const fetchArticleById = async (id: number): Promise<Article | null> => {
-  const articles = await fetchArticles();
-  return articles.find((article) => article.id === id) || null;
+  const response = await fetch(`http://localhost:5075/api/data/articles/${id}`);
+  
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null; // Article not found
+    }
+    throw new Error('Failed to fetch article');
+  }
+
+  return response.json();
 };
 
 export const fetchArticlesByTag = async (tagId: number): Promise<Article[]> => {
