@@ -1,7 +1,8 @@
 // pages/tags/[tagId].tsx
 import { GetServerSideProps } from 'next';
-import styles from '../../styles/ArticlePage.module.scss'
-import ArticleList from '@/components/ArticleList';
+import styles from '../../styles/index.module.scss'
+//import ArticleList from '@/components/ArticleList';
+import AdditionalArticles from '@/components/AdditionalArticles';
 import { fetchArticlesByTag } from '@/services/apiService';
 import { Article } from '@/types/article';
 
@@ -20,7 +21,7 @@ export default function TagPage({ tagId, articles }: TagPageProps) {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}> </h1>
-      <ArticleList articles={articles} />
+      <AdditionalArticles articles={articles} />
     </div>
   );
 }

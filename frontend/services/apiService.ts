@@ -20,6 +20,7 @@ export const fetchArticleById = async (id: number): Promise<Article | null> => {
 };
 
 export const fetchArticlesByTag = async (tagId: number): Promise<Article[]> => {
-  const articles = await fetchArticles();
-  return articles.filter((article) => article.tags.some((tag) => tag.tagId === tagId));
+  const response = await fetch(`http://localhost:5075/api/data/articles/by-tag/${tagId}`);
+  if (!response.ok) throw new Error('Failed to fetch articles by tag');
+  return response.json();
 };

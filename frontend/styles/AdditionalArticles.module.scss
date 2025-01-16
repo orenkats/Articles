@@ -1,9 +1,12 @@
 .additionalList {
+    direction: rtl; 
     list-style: none; 
     padding: 0;
     margin: 0;
 }
-
+.additionalHeader{
+    direction: rtl; 
+}
 .linkButton {
     all: unset; 
     color: blue;
