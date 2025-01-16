@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { fetchArticleById } from '@/services/apiService';
 import { Article } from '@/types/article';
-import styles from '../index.module.scss';
+import styles from '../../styles/index.module.scss';
 
 type ArticlePageProps = {
   article: Article;
@@ -32,7 +32,6 @@ export default function ArticlePage({ article }: ArticlePageProps) {
         />
         <p className={styles.description}>{article.description}</p>
         <div className={styles.tags}>
-          <strong>Tags:</strong>
           <ul>
             {article.tags.map((tag) => (
               <li key={tag.tagId}>
