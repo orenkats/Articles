@@ -1,7 +1,6 @@
 // pages/tags/[tagId].tsx
 import { GetServerSideProps } from 'next';
 import styles from '../../styles/index.module.scss'
-//import ArticleList from '@/components/ArticleList';
 import AdditionalArticles from '@/components/AdditionalArticles';
 import { fetchArticlesByTag } from '@/services/apiService';
 import { Article } from '@/types/article';

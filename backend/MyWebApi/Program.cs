@@ -12,12 +12,11 @@ builder.Services.AddSingleton<IFileReaderService, JsonFileReader>();
 
 var app = builder.Build();
 app.UseCors(builder =>
-    builder.WithOrigins("http://localhost:3000")
+    builder.WithOrigins("http://localhost:3000", "https://articles-woad.vercel.app")
            .AllowAnyHeader()
            .AllowAnyMethod());
 
-// Configure the HTTP request pipeline.
-// Use custom middleware for logging
+
 app.UseMiddleware<LoggingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
